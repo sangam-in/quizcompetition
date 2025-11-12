@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Competition Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Dashboard Sidebar -->
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-header">
+            <h3>Live Scoreboard</h3>
+            <button id="toggleDashboard" class="toggle-btn">-</button>
+        </div>
+        <div class="dashboard-content">
+            <div id="scoreboard" class="scoreboard">
+                <!-- Team scores will be populated here -->
+            </div>
+            <div class="round-info">
+                <p>Current Round: <span id="currentRound">Preliminary</span></p>
+                <p>Question: <span id="currentQuestion">1</span></p>
+            </div>
+            <div class="quick-nav">
+                <h4>Quick Navigation</h4>
+                <div class="nav-buttons">
+                    <button class="nav-btn" data-target="home">Home</button>
+                    <button class="nav-btn" data-target="rounds">Rounds</button>
+                    <button class="nav-btn" data-target="scoreboard-page">Scoreboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <!-- Homepage -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Quiz Competition Manager</h1>
+                <p>Professional quiz competition management system</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card" data-target="rounds">
+                    <div class="menu-icon">🥇</div>
+                    <h3>Start Competition</h3>
+                    <p>Begin or continue a quiz competition</p>
+                </div>
+                <div class="menu-card" data-target="teams">
+                    <div class="menu-icon">👥</div>
+                    <h3>Team Management</h3>
+                    <p>Add, edit, or remove teams</p>
+                </div>
+                <div class="menu-card" data-target="questions">
+                    <div class="menu-icon">📝</div>
+                    <h3>Question Manager</h3>
+                    <p>Manage questions for all rounds</p>
+                </div>
+                <div class="menu-card" data-target="scoreboard-page">
+                    <div class="menu-icon">🏆</div>
+                    <h3>View Scoreboard</h3>
+                    <p>See current standings</p>
+                </div>
+                <div class="menu-card" data-target="settings">
+                    <div class="menu-icon">⚙️</div>
+                    <h3>Settings</h3>
+                    <p>Configure competition settings</p>
+                </div>
+                <div class="menu-card" data-target="data">
+                    <div class="menu-icon">💾</div>
+                    <h3>Data Management</h3>
+                    <p>Export or import competition data</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Management -->
+        <section id="teams" class="page">
+            <div class="page-header">
+                <h2>Team Management</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="teams-container">
+                <div class="teams-form">
+                    <h3>Add New Team</h3>
+                    <div class="form-group">
+                        <input type="text" id="teamName" placeholder="Enter team name">
+                        <button id="addTeam" class="btn-primary">Add Team</button>
+                    </div>
+                </div>
+                <div class="teams-list">
+                    <h3>Current Teams</h3>
+                    <div id="teamsList" class="teams-grid">
+                        <!-- Teams will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Round Selection -->
+        <section id="rounds" class="page">
+            <div class="page-header">
+                <h2>Competition Rounds</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="rounds-container">
+                <div class="round-card" data-round="preliminary">
+                    <div class="round-icon">🥇</div>
+                    <h3>Preliminary Round</h3>
+                    <p>Passable, A/V, Buzzer and Randomizer questions</p>
+                    <button class="btn-primary">Start Round</button>
+                </div>
+                <div class="round-card" data-round="semifinal">
+                    <div class="round-icon">🥈</div>
+                    <h3>Semi-Final Round</h3>
+                    <p>Passable, A/V, Buzzer and Randomizer questions</p>
+                    <button class="btn-primary">Start Round</button>
+                </div>
+                <div class="round-card" data-round="final">
+                    <div class="round-icon">🏆</div>
+                    <h3>Final Round</h3>
+                    <p>Passable, A/V, Buzzer, Randomizer, Rapid Fire and Surprise questions</p>
+                    <button class="btn-primary">Start Round</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question Manager -->
+        <section id="questions" class="page">
+            <div class="page-header">
+                <h2>Question Manager</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="questions-container">
+                <div class="questions-controls">
+                    <div class="form-group">
+                        <label for="roundSelect">Round</label>
+                        <select id="roundSelect">
+                            <option value="preliminary">Preliminary Round</option>
+                            <option value="semifinal">Semi-Final Round</option>
+                            <option value="final">Final Round</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="typeSelect">Question Type</label>
+                        <select id="typeSelect">
+                            <option value="passable">Passable Questions</option>
+                            <option value="av">A/V Round</option>
+                            <option value="buzzer">Buzzer Round</option>
+                            <option value="randomizer">Randomizer Round</option>
+                            <option value="rapidfire">Rapid Fire</option>
+                            <option value="surprise">Surprise Round</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button id="addQuestion" class="btn-primary">Add Question</button>
+                    </div>
+                </div>
+                <div class="questions-list">
+                    <h3>Questions</h3>
+                    <div id="questionsList">
+                        <!-- Questions will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoreboard Page -->
+        <section id="scoreboard-page" class="page">
+            <div class="page-header">
+                <h2>Competition Scoreboard</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="scoreboard-container">
+                <div class="scoreboard-header">
+                    <h3>Current Standings</h3>
+                    <button id="resetScores" class="btn-danger">Reset Scores</button>
+                </div>
+                <div id="fullScoreboard" class="full-scoreboard">
+                    <!-- Full scoreboard will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="settings" class="page">
+            <div class="page-header">
+                <h2>Settings</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="settings-container">
+                <div class="setting-group">
+                    <h3>Timer Settings</h3>
+                    <div class="form-group">
+                        <label for="defaultTimer">Default Question Time (seconds)</label>
+                        <input type="number" id="defaultTimer" value="60" min="10" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="rapidFireTimer">Rapid Fire Time (minutes)</label>
+                        <input type="number" id="rapidFireTimer" value="5" min="1" max="10">
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>Scoring Settings</h3>
+                    <div class="form-group">
+                        <label for="correctPoints">Points for Correct Answer</label>
+                        <input type="number" id="correctPoints" value="10" min="1" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="passPoints">Points for Passed Question</label>
+                        <input type="number" id="passPoints" value="5" min="0" max="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="penaltyPoints">Penalty for Wrong Answer</label>
+                        <input type="number" id="penaltyPoints" value="5" min="0" max="50">
+                    </div>
+                </div>
+                <button id="saveSettings" class="btn-primary">Save Settings</button>
+            </div>
+        </section>
+
+        <!-- Data Management -->
+        <section id="data" class="page">
+            <div class="page-header">
+                <h2>Data Management</h2>
+                <button class="back-btn">← Back</button>
+            </div>
+            <div class="data-container">
+                <div class="data-card">
+                    <h3>Export Data</h3>
+                    <p>Export all competition data as a JSON file</p>
+                    <button id="exportData" class="btn-primary">Export Data</button>
+                </div>
+                <div class="data-card">
+                    <h3>Import Data</h3>
+                    <p>Import competition data from a JSON file</p>
+                    <div class="form-group">
+                        <input type="file" id="importFile" accept=".json">
+                        <button id="importData" class="btn-primary">Import Data</button>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <h3>Reset Competition</h3>
+                    <p>Clear all data and start a new competition</p>
+                    <button id="resetCompetition" class="btn-danger">Reset Competition</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Round Interface -->
+        <section id="round-interface" class="page">
+            <div class="page-header">
+                <h2 id="roundTitle">Round Title</h2>
+                <button class="back-btn">← Back to Rounds</button>
+            </div>
+            <div class="round-interface-container">
+                <div class="question-section">
+                    <div class="question-header">
+                        <div class="question-type-navigation">
+                            <h3 id="questionType">Question Type</h3>
+                            <div class="type-buttons">
+                                <button id="prevType" class="btn-secondary">← Previous Type</button>
+                                <button id="nextType" class="btn-secondary">Next Type →</button>
+                            </div>
+                        </div>
+                        <div class="question-nav">
+                            <button id="prevQuestion" class="btn-secondary">← Previous</button>
+                            <span id="questionNumber">Question 1 of 10</span>
+                            <button id="nextQuestion" class="btn-secondary">Next →</button>
+                        </div>
+                    </div>
+                    <div class="question-content">
+                        <div id="questionText" class="question-text">
+                            <!-- Question text will be displayed here -->
+                        </div>
+                        <div id="questionOptions" class="question-options">
+                            <!-- Options will be displayed here -->
+                        </div>
+                        <div id="questionAnswer" class="question-answer">
+                            <!-- Answer will be displayed here -->
+                        </div>
+                    </div>
+                    <div class="question-controls">
+                        <button id="revealAnswer" class="btn-secondary">Reveal Answer</button>
+                        <button id="passQuestion" class="btn-warning">Pass Question</button>
+                    </div>
+                </div>
+                <div class="teams-section">
+                    <div class="timer-section">
+                        <div class="timer-display">
+                            <span id="timerValue">60</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button id="startTimer" class="btn-primary">Start Timer</button>
+                            <button id="stopTimer" class="btn-secondary">Stop</button>
+                            <button id="resetTimer" class="btn-secondary">Reset</button>
+                        </div>
+                        <div class="timer-settings">
+                            <label for="customTimer">Set Custom Time (seconds)</label>
+                            <input type="number" id="customTimer" value="60" min="10" max="300">
+                            <button id="setTimer" class="btn-secondary">Set</button>
+                        </div>
+                    </div>
+                    <div class="teams-controls">
+                        <h3>Team Controls</h3>
+                        <div id="roundTeams" class="teams-buttons">
+                            <!-- Team buttons will be populated here -->
+                        </div>
+                        <div class="scoring-controls">
+                            <button id="awardPoints" class="btn-success">Award Points</button>
+                            <button id="deductPoints" class="btn-danger">Deduct Points</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for adding/editing questions -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Question</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="questionTextInput">Question Text</label>
+                    <textarea id="questionTextInput" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="questionOptionsInput">Options (one per line, leave empty for no options)</label>
+                    <textarea id="questionOptionsInput" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="questionAnswerInput">Correct Answer</label>
+                    <input type="text" id="questionAnswerInput">
+                </div>
+                <div class="form-group">
+                    <label for="questionPoints">Points</label>
+                    <input type="number" id="questionPoints" value="10">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelQuestion" class="btn-secondary">Cancel</button>
+                <button id="saveQuestion" class="btn-primary">Save Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for rapid fire round -->
+    <div id="rapidFireModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Rapid Fire Round</h3>
+            </div>
+            <div class="modal-body">
+                <div class="rapid-fire-timer">
+                    <h4>Time Remaining: <span id="rapidFireTimerValue">5:00</span></h4>
+                </div>
+                <div class="rapid-fire-controls">
+                    <button id="startRapidFire" class="btn-primary">Start Rapid Fire</button>
+                    <button id="stopRapidFire" class="btn-secondary">Stop</button>
+                    <button id="correctRapidFire" class="btn-success">Correct</button>
+                    <button id="incorrectRapidFire" class="btn-danger">Incorrect</button>
+                </div>
+                <div class="rapid-fire-stats">
+                    <p>Correct Answers: <span id="rapidFireCorrect">0</span></p>
+                    <p>Incorrect Answers: <span id="rapidFireIncorrect">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
